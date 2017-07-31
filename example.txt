@@ -1,0 +1,9 @@
++-------------------------+---------+---------+-------------------------+---------+----------+-----------+-------------------------------+-----------------+
+| company                 | fname   | lname   | email                   | country | state    | city      | address                       | phone           |
++-------------------------+---------+---------+-------------------------+---------+----------+-----------+-------------------------------+-----------------+
+| Example Industries, LLC | Example | User    | exampleuser@example.com | us      | CA       | Anytown   | 12345 Example Blvd.
+Apt. 123  | +1 123-555-1234 |
+| Second Example, GMBH    | Another | Example | anotherone@example.com  | in      | GujarÄt | Othertown | 12345 Exemplary Rd.
+Suite 123 | +91 9876543210  |
+| Third Example, Inc.     | Third   | Example | yetmore@example.com     | us      | NY       | New York  | 12345 Example Ave. Apt. 123   | +1 123-555-4321 |
++-------------------------+---------+---------+-------------------------+---------+----------+-----------+-------------------------------+-----------------+

@@ -1,0 +1,25 @@
+#!/usr/bin/php
+<?php
+require __DIR__.'/MySQLConverter.php';
+
+// Example script to load and convert a file using the MySQLConverter class.
+// Invoke from the shell of your choice in the form:
+//
+// ./example infile.txt outfile.csv
+//
+// Will convert the content of infile.txt and output CSV data to outfile.csv
+
+if (empty($argv[1])) {
+	echo "No input file specified.\n";
+	exit(1);
+}
+$input = $argv[1];
+if ($input[0] != '/') {
+	$input = __DIR__.'/'.$input;
+	$input = realpath($input);
+}
+
+$output = empty($argv[2]) ? true : $argv[2];
+
+$converter = new \MySQLConverter\MySQLConverter();
+$converter->convert($input, $output);
