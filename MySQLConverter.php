@@ -87,8 +87,21 @@ class MySQLConverter {
 		return file($input);
 	}
 
-	protected function extractField($row, $length) {
-		;
+	/**
+	 * Get an individual field from the row of data. Remove the delimiters,
+	 * the space padding each delmiter from the data, and any spaces used to
+	 * pad the data out to fixed length.
+	 * 
+	 * @param string $row
+	 * @param int    $start The delimiter position before the data
+	 * @param int    $end   The delimiter position after the data
+	 * @return string
+	 */
+	protected function extractField($row, $start, $end) {
+		$len = ($end - $start) - 3;
+		$field = substr($row, $start+2, $len);
+		$field = rtrim($field, ' ');
+		return $field;
 	}
 	
 	/**
@@ -245,7 +258,7 @@ class MySQLConverter {
 
 			$fields  = array();
 			for ($i=0; isset($thisDelimiters[$i+1]); $i++) { 
-				$fields[] = $this->getField(
+				$fields[] = $this->extractField(
 					$row,
 					$thisDelimiters[$i],
 					$thisDelimiters[$i+1]);
@@ -253,22 +266,5 @@ class MySQLConverter {
 			$output[] = $fields;
 		}
 		return $output;
-	}
-
-	/**
-	 * Get an individual field from the row of data. Remove the delimiters,
-	 * the space padding each delmiter from the data, and any spaces used to
-	 * pad the data out to fixed length.
-	 * 
-	 * @param string $row
-	 * @param int    $start The delimiter position before the data
-	 * @param int    $end   The delimiter position after the data
-	 * @return string
-	 */
-	protected function getField($row, $start, $end) {
-		$len = ($end - $start) - 3;
-		$field = substr($row, $start+2, $len);
-		$field = rtrim($field, ' ');
-		return $field;
 	}
 }
