@@ -12,7 +12,7 @@ This tool is *not* the best choice if you have filesystem access to your MySQL s
 ## A word of caution
 In most cases, you will be converting data to CSV so that you can import it into a spreadsheet somewhere. There are some values that a malicious user might have placed into your database which while both MySQL and this tool will handle them without incident, might cause Excel to execute possibly dangerous and arbitrary code if the data is imported with macros and VB scripting turned on.
 
-*You should never import user data into Excel with these features enabled*. This tool makes no attempt to detect or remove such content. ~~Your users are almost certainly terrible people and shouldn't be trusted.~~ **_Proceed at your own risk_**.
+**You should never import user data into Excel with these features enabled**. This tool makes no attempt to detect or remove such content. ~~Your users are almost certainly terrible people and shouldn't be trusted.~~ **_Proceed at your own risk_**.
 
 ## Quickstart
 ```
