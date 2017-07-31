@@ -3,7 +3,6 @@
   "type": "library",
   "description": "A quick-and-dirty tool for converting raw MySQL query output to CSV.",
   "keywords": ["MySQL", "CSV"],
-  "version": "1.0.0",
   "homepage": "https://github.com/mrmarkfrench/mysql-converter",
   "authors": [
     {
