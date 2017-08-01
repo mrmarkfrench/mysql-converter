@@ -57,7 +57,7 @@ class MySQLConverter {
 	/////////////////////////////////////////////////////////////////////
 
 	/**
-	 * Count the number of verts ("|") in a row.
+	 * Count the number of verts ("|", also known as pipe characters) in a row.
 	 * @return int
 	 */
 	protected function countVerts($row) {
