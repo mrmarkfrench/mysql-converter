@@ -101,6 +101,16 @@ class MySQLConverter {
 		$len = ($end - $start) - 3;
 		$field = substr($row, $start+2, $len);
 		$field = rtrim($field, ' ');
+		// If the field is numeric, it's unlikely that the leading whitespace
+		// is intentional, but rather that the output was right-justified.
+		$trimmed = trim($field);
+		if (is_numeric($trimmed)) {
+			$field = $trimmed;
+		}
+		if ($trimmed == 'NULL') {
+			$field = null;
+		}
+		// Return the cleaned-up value
 		return $field;
 	}
 	
@@ -181,7 +191,7 @@ class MySQLConverter {
 				// We should only bother to check if the line is not the correct
 				// length.
 				if ($thisLen != $lineLen) {
-					$thisCount     = $this->countVerts($row);
+					$thisCount = $this->countVerts($row);
 					// Did we find the right number of delimiters?
 					if ($thisCount == $numDelimiters) {
 						$lineFixed = true;
@@ -191,8 +201,16 @@ class MySQLConverter {
 				}
 			}
 		}
+		// If the line was simply too long to start, it might still be ok...
+		if (!$lineFixed) {
+			$totalDelimiters = $this->countVerts($row);
+			if ($totalDelimiters == $numDelimiters) {
+				$lineFixed = true;
+			}
+		}
+		// Did we manage to fix it?
 		if (($thisLen != $lineLen) && !$lineFixed) {
-			throw new \Exception("Unable to fix length of line {$index}. Expected {$lineLen}, got {$thisLen}");
+			throw new \Exception("Unable to fix length of line {$index}. Expected {$lineLen}, got {$thisLen}. Expected {$numDelimiters}, got {$totalDelimiters} delimiters.");
 		}
 		return $row;
 	}
